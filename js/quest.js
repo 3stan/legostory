@@ -1,9 +1,21 @@
 "use strict";
 
+var PrereqTypes = {
+	QUEST: 1,
+	CHARACTER: 2
+}
+
+var Prereq = Backbone.Model.extend({
+	initialize: function(prereqType) {
+		this.set("prereqType", prereqType)
+	}
+})
+
 var Quest = Backbone.Model.extend({
 	defaults: {
 		weight: 1,
-		rewards: {}
+		rewards: {},
+		prereqs: {}
 	},
 
 	initialize: function(givenTo, reportTo) {
@@ -13,4 +25,8 @@ var Quest = Backbone.Model.extend({
 		this.set("givenTo", givenTo);
 		this.set("reportTo", reportTo);
 	}
+})
+
+var QuestList = Backbone.Collection.extend({
+	models: Quest
 })

@@ -11,3 +11,7 @@ var Town = Backbone.Collection.extend({
 		return sum / this.models.length;
 	}
 })
+
+var TownList = Backbone.Collection.extend({
+	models: Town
+})
