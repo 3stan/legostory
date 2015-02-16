@@ -15,7 +15,7 @@ var Character = Backbone.Model.extend({
         moodWeight: 1,
         inventory: [],
         preferences: [],
-        hometown: null
+        hometown: ""
     }
 })
 

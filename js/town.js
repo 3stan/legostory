@@ -1,7 +1,7 @@
 "use strict";
 
-var Town = Backbone.Collection.extend({
-    models: Character,
+var Town = Backbone.Model.extend({
+    characters: CharacterList,
 
     defaults: {
         name: ""

@@ -14,15 +14,16 @@ var Game = Backbone.Model.extend({
     },
 
     loadCharacters: function(charactersFile) {
-        var testCharacter = new Character();
+        var testCharacter = new Character()
         testCharacter.set("name", "TestCharacter")
+        testCharacter.set("hometown", "TestTown")
         this.get("characters").add(testCharacter)
     },
 
     loadPlayer: function(playerFile) {
-        var testPlayer = new Player();
-        testPlayer.set("name", "TestPlayer");
-        this.set("player", testPlayer);
+        var testPlayer = new Player()
+        testPlayer.set("name", "TestPlayer")
+        this.set("player", testPlayer)
     },
 
     initialize: function(townsFile, charactersFile, playerFile) {
@@ -30,8 +31,8 @@ var Game = Backbone.Model.extend({
         charactersFile = typeof charactersFile !== 'undefined' ? charactersFile : "resources/characters.tsv";
         playerFile = typeof playerFile !== 'undefined' ? playerFile : "resources/player.txt";
 
-        loadTowns(townsFile)
-        loadCharacters(charactersFile)
-        loadPlayer(playerFile)
+        this.loadTowns(townsFile)
+        this.loadCharacters(charactersFile)
+        this.loadPlayer(playerFile)
     }
 })
