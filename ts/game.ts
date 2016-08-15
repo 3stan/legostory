@@ -1,4 +1,5 @@
 import { Character, Player } from "./character";
+import { Map } from "./map";
 import { Town } from "./town";
 
 export interface GameConfig {
@@ -11,6 +12,7 @@ export class Game {
   towns: Town[] = [];
   characters: Character[] = [];
   player: Player;
+  map: Map;
 
   generateCharacters(town: Town): void {
     let testCharacter = new Character()
@@ -38,5 +40,6 @@ export class Game {
   constructor(config: GameConfig) {
     this.generateTowns("")
     this.loadPlayer("")
+    this.map = new Map(4, 4)
   }
 } 
