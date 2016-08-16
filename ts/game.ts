@@ -1,6 +1,6 @@
-import { Character, Player } from "./character";
-import { Map } from "./map";
-import { Town } from "./town";
+import { Character, Player } from "./models/character";
+import { Map } from "./models/map";
+import { Town } from "./models/town";
 
 export interface GameConfig {
   townsFile?: string;

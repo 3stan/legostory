@@ -1,4 +1,4 @@
-/// <reference path="../ext/jquery.d.ts" />
+/// <reference path="../../ext/jquery.d.ts" />
 
 enum TileTypes {
   Town,
@@ -49,7 +49,7 @@ class FieldTile extends MapTile {
 
 export class Map {
 
-  createTile(inputType: string): MapTile {
+  static createTile(inputType: string): MapTile {
     if (TileTypes[inputType] == TileTypes.Field) {
       return new FieldTile()
     } else if (TileTypes[inputType] == TileTypes.River) {
@@ -68,7 +68,7 @@ export class Map {
     let numTiles = this.width * this.height
     for (var i = 0; i < numTiles; i++) {
       let random = Math.floor(Math.random() * (TileTypes.Last))
-      let tile = this.createTile(TileTypes[random])
+      let tile = Map.createTile(TileTypes[random])
       this.tiles = this.tiles.concat(tile)
     }
   }
