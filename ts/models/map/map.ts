@@ -1,11 +1,6 @@
-/// <reference path="../../ext/jquery.d.ts" />
+/// <reference path="../../../ext/jquery.d.ts" />
 
-enum TileTypes {
-  Town,
-  River,
-  Field,
-  Last // Unused.
-}
+import {MapGenerator, RandomMapGenerator} from "./map_generator";
 
 enum TransportationType {
   Ground,
@@ -14,13 +9,13 @@ enum TransportationType {
   All
 }
 
-abstract class MapTile {
+export abstract class MapTile {
   traversableBy: TransportationType[];
   public minimapRepresentation: string;
   abstract render(): void;
 }
 
-class TownTile extends MapTile {
+export class TownTile extends MapTile {
   traversableBy = [TransportationType.All]
   minimapRepresentation = "T"
 
@@ -29,7 +24,7 @@ class TownTile extends MapTile {
   }
 }
 
-class RiverTile extends MapTile {
+export class RiverTile extends MapTile {
   traversableBy = [TransportationType.Water, TransportationType.Air]
   minimapRepresentation = "R"
 
@@ -38,7 +33,7 @@ class RiverTile extends MapTile {
   }
 }
 
-class FieldTile extends MapTile {
+export class FieldTile extends MapTile {
   traversableBy = [TransportationType.Ground, TransportationType.Air]
   minimapRepresentation = "F"
 
@@ -49,29 +44,10 @@ class FieldTile extends MapTile {
 
 export class Map {
 
-  static createTile(inputType: string): MapTile {
-    if (TileTypes[inputType] == TileTypes.Field) {
-      return new FieldTile()
-    } else if (TileTypes[inputType] == TileTypes.River) {
-      return new RiverTile()
-    } else {
-      return new TownTile()
-    }
-  }
-
   width: number;
   height: number;
+  generator: MapGenerator
   tiles: MapTile[] = [];
-
-  // Just a dumb generation logic for now
-  generateMap(): void {
-    let numTiles = this.width * this.height
-    for (var i = 0; i < numTiles; i++) {
-      let random = Math.floor(Math.random() * (TileTypes.Last))
-      let tile = Map.createTile(TileTypes[random])
-      this.tiles = this.tiles.concat(tile)
-    }
-  }
 
   render(): void {
     let row = ""
@@ -86,9 +62,11 @@ export class Map {
   }
 
   constructor(inputWidth: number, inputHeight: number) {
+    this.generator = new RandomMapGenerator
+
     this.width = inputWidth
     this.height = inputHeight
-    this.generateMap()
+    this.tiles = this.generator.generate(this.width, this.height)
     this.render()
   }
 }

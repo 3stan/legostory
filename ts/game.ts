@@ -1,5 +1,5 @@
 import { Character, Player } from "./models/character";
-import { Map } from "./models/map";
+import { Map } from "./models/map/map";
 import { Town } from "./models/town";
 
 export interface GameConfig {
